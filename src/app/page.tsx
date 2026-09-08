@@ -82,6 +82,36 @@ export default function HomePage() {
         </section>
       </FadeIn>
 
+      {/* What I'm learning — soft orange band */}
+      <div className="bg-[#faf2ee]">
+      <FadeIn>
+        <section id="learning" className="mx-auto w-full max-w-7xl px-6 py-20 md:px-12 md:py-28 lg:px-20 lg:py-32">
+          <h2 className="font-heading mb-8 text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[0.92] tracking-[-0.03em] text-(--color-text) md:mb-10">
+            What I&apos;m learning
+          </h2>
+
+          <Link
+            href="/notes/agentic-engineering"
+            className="group flex max-w-200 flex-col gap-3 rounded-xl border border-(--color-border) p-6 transition-colors hover:bg-(--color-surface) md:p-8"
+          >
+            <span className="font-body text-[13px] font-medium tracking-[0.08em] text-(--color-muted) uppercase">
+              Notes
+            </span>
+            <h3 className="font-heading text-[clamp(1.35rem,3vw,2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-(--color-text)">
+              The 4 agentic engineering skills to know
+            </h3>
+            <p className="font-body text-[16px] leading-[1.7] text-(--color-muted)">
+              Context, containment, loop, and graph engineering. Recreating Super Mario Bros.
+              taught me to set testable goals and divide agent work around system dependencies.
+            </p>
+            <span className="font-body mt-1 flex items-center gap-2 text-[15px] font-medium text-(--color-link) group-hover:underline">
+              Read the write-up <ArrowUpRightFromSquareIcon size={14} />
+            </span>
+          </Link>
+        </section>
+      </FadeIn>
+      </div>
+
       {/* Selected Work — dark band */}
       <HorizontalProjects
         projects={featured.map((p) => ({
