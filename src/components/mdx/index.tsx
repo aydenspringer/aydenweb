@@ -5,6 +5,8 @@ import { ImageGrid } from "./ImageGrid"
 import { PhoneMockupPair } from "./PhoneMockupPair"
 import { Highlight } from "./Highlight"
 import { CalloutQuote } from "./CalloutQuote"
+import { WhispStage } from "./Whisp"
+import { YouTubeEmbed } from "./YouTubeEmbed"
 
 function slugify(text: string): string {
   return text
@@ -21,6 +23,8 @@ export const mdxComponents: MDXComponents = {
   PhoneMockupPair,
   Highlight,
   CalloutQuote,
+  WhispStage,
+  YouTubeEmbed,
   h2: ({ children, ...props }: React.ComponentPropsWithoutRef<"h2">) => {
     const text = typeof children === "string" ? children : ""
     const id = slugify(text)

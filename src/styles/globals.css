@@ -181,3 +181,122 @@ html.lenis, html.lenis body {
   background: currentColor;
   border-radius: 100%;
 }
+
+/* Whisp, the Lucid Lock mascot rig (src/components/mdx/Whisp.tsx). Ported from
+   the lucidlock.co stylesheet so the layers sit the same way they do there. */
+.whisp {
+  position: relative;
+  flex: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.whisp--interactive {
+  cursor: pointer;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  display: block;
+}
+
+.whisp--interactive:focus-visible {
+  outline: 2px solid #b9c5d0;
+  outline-offset: 8px;
+  border-radius: 50%;
+}
+
+.whisp__layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.whisp__shadow {
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0));
+}
+
+.whisp__glow {
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(185 197 208 / 0.34), rgb(185 197 208 / 0));
+}
+
+.whisp__rig {
+  width: 100%;
+  height: 100%;
+}
+
+.whisp__arm {
+  border-radius: 999px;
+}
+
+.whisp__torso {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 86.4%;
+  height: 86.4%;
+  transform: translate(-50%, -50%);
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+.whisp__torso img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.whisp__specular {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.whisp__face {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+
+.whisp__eyes {
+  display: flex;
+  align-items: center;
+}
+
+.whisp__eye-wrap {
+  position: relative;
+  will-change: transform;
+}
+
+.whisp__eye {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to top, #000000, #171a21);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.whisp__glint {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.94);
+}
+
+.whisp__mouth {
+  overflow: visible;
+}

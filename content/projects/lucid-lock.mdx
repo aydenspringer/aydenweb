@@ -1,0 +1,155 @@
+---
+title: "Lucid Lock: A Dream Journal That Can't Lose Your Dreams"
+subtitle: "What would a dream journal look like if it could never lose what you wrote?"
+slug: "lucid-lock"
+color: "#111214"
+thumbnail: "/projects/lucid-lock/thumb.webp"
+heroImage: "/projects/lucid-lock/app-store-set-f.webp"
+splitHero: false
+role: "Founder & Solo Developer"
+timeline: "Aug – Sep 2026"
+team:
+  - "Ayden Springer"
+tools:
+  - "Swift"
+  - "SwiftUI"
+  - "SwiftData"
+  - "StoreKit 2"
+  - "NaturalLanguage"
+  - "Apple Intelligence"
+  - "Speech"
+  - "Svelte"
+  - "ChatGPT Image"
+  - "Claude"
+description: "A native iOS app that trains lucid dreaming from your own journal, with no server and no account. Shipped to the App Store in six weeks."
+order: 1
+featured: true
+category: "featured"
+---
+
+## Overview
+
+Lucid Lock is a native iOS app that teaches people to lucid dream, and the training starts with dream recall. It is a dream journal first. Everything a person writes stays on their phone, and the app builds a training plan from what they record. <Highlight>There is no account, no server, and no dream content ever leaves the device.</Highlight>
+
+I built it alone under my company, PixelNova LLC. The first commit to the iOS repository landed on August 4, 2026, and <Highlight>Apple approved the app for the App Store in mid-September</Highlight>, about six weeks later. By then the codebase was around 39,000 lines of Swift across 167 files, with 443 automated tests and zero third-party packages.
+
+<ProjectImage src="/projects/lucid-lock/free-tier.webp" alt="Three iPhone screens from Lucid Lock: voice capture, the dream journal, and recurring dream signs" caption="Capture, journal, and signs. This is the free tier as it shipped." />
+
+---
+
+## How It Started
+
+A few years ago I changed phones and lost every dream I had ever recorded. I had been using a dream journaling app and I cared about what was in it, but its export was incomplete, and the history did not survive the move. The original idea for Lucid Lock was personal. I wanted to build the journal I wished I had been using, one where the history belongs to the person who wrote it and can be exported, imported, or recovered instead of vanishing with a device or a startup.
+
+<CalloutQuote>"Your dreams should not disappear because you changed phones or your app didn't let you export it."</CalloutQuote>
+
+The idea grew once I started treating the journal as structured data instead of plain text. Someone trying to lucid dream builds up recurring people, places, emotions, dream signs, failed reality checks, and techniques that did or did not work. That history can teach a person what works for them specifically, instead of handing everyone the same generic advice. <Highlight>The journal became the foundation of a training system rather than the whole product.</Highlight>
+
+---
+
+## The First Build Went the Wrong Way
+
+The first version was not carefully architected. I gave an AI agent a goal and iterated on whatever came back, over and over. That got a lot of software written very quickly, and it taught me the most important lesson of the project: <Highlight>AI can build the wrong product very quickly.</Highlight> It produced features before I had decided what the app should be, and turning that experiment into a real application took weeks of rewrites.
+
+<CalloutQuote>"AI can gladly build whatever you want, even in wildly the wrong direction. What I do is take real problems I run into and turn them into a solution."</CalloutQuote>
+
+So I moved design ahead of implementation. I used ChatGPT Image to explore directions and produce a full brand kit: a logo system, a palette, typography, iconography, a motion language, and a construction sheet for the mascot. Then I used Claude to prototype screens, onboarding, and interactions before I touched the app again. Specifying the experience first is what stopped the expensive rewrites. The colors on that board are still the exact values in the app's `LucidColor.swift`, starting with Night Ink (#111214), which is also the background of this page's header.
+
+<ProjectImage src="/projects/lucid-lock/design-board.webp" alt="The Lucid Lock brand board with logo system, Whisp construction and expressions, color palette, typography, journal and onboarding mockups" caption="The brand board that set the visual language before production code changed again." />
+
+---
+
+## Whisp
+
+Whisp is the character who greets people on their first morning in the app. He took two full days of art direction. The AI could generate a hundred variations, but it could not decide what Whisp meant, and I iterated on his proportions and movement more than anything else in the project because small details changed the personality of the whole product. <Highlight>He is a visual guide who makes a clinical subject feel less clinical.</Highlight> He is not a chatbot and he is not a virtual pet. He has no streaks for you to break and he never scores you.
+
+In the app, Whisp is a layered rig rather than an image. His body, arms, face, specular highlight, and ground shadow each move on their own, with an idle float, a breath, a blink cycle, and seven reactions. The Whisp below is the same rig I wrote for the Lucid Lock website, ported to React for this page, and <Highlight>its poses are copied value for value from the Swift source</Highlight>, so he moves here exactly the way he moves on a phone. Hover over him to get his attention, click him to celebrate, or pick a reaction.
+
+<WhispStage caption="Whisp running live. In the app, the celebrate reaction is reserved for one moment, the moment someone subscribes, and nothing else is allowed to spend it." />
+
+One detail I like is how the rig handles size. The face was first drawn against a 160 point Whisp, which made the features look pinched on large renders and oversized on small badges. I fixed it by scaling the face with an exponent under one, so a 58 point Whisp and a 236 point Whisp read as the same character.
+
+<ImageGrid columns={2}>
+  <ProjectImage src="/projects/lucid-lock/whisp-construction.webp" alt="Whisp character construction sheet" caption="The construction sheet from the brand board." />
+  <ProjectImage src="/projects/lucid-lock/whisp-expressions.webp" alt="Whisp expressions and states: happy, calm, curious, listening, remembering, alert, sleeping, recognized" caption="The expression sheet that became seven animated reactions." />
+</ImageGrid>
+
+---
+
+## Recall First
+
+Most people who try lucid dreaming fail at the first step because they cannot remember their dreams. So instead of throwing advanced techniques at a new user, the first stage of training builds recall and keeps the journal useful. The free app covers recall training, the unlimited journal, dream signs, reality checks, twelve short lessons, Face ID, and export.
+
+Lucid Lock Pro is the adaptive training layer. It picks a nightly practice from that morning's entry, chooses between the MILD and SSILD techniques based on the person's own recall baseline, runs a review every seven practice nights, and adds pattern analysis across everything they have written. <Highlight>The rule I settled on is that recall is free and the program is the subscription.</Highlight> Pro is offered at the edge of the free stage, after someone has seen their recall change, and there is no paywall gate anywhere in the app.
+
+<ProjectImage src="/projects/lucid-lock/tonight-path-pro.webp" alt="Three screens: Tonight with a 21-night milestone, the training Path, and the Lucid Lock Pro offer" caption="Tonight, the Path, and the boundary where Pro is offered instead of enforced." />
+
+---
+
+## Keeping the Intelligence on the Phone
+
+My original plan was to analyze dreams with Apple's on-device models and generate personal observations for each entry. In practice, the small models were inconsistent at reading dream entries. I tested generated notes and coaching lines from Whisp, and <Highlight>I decided not to make unreliable generated analysis the foundation of the product.</Highlight>
+
+What shipped is deterministic pattern matching and structured signals first. Recurring situations are found with NaturalLanguage embeddings computed on the device, and Apple Intelligence only phrases the result on phones that support it. The generated note still exists in the code behind a flag, and that flag is off in the release build. Removing the most impressive technology in the app was the right call because it did not reliably make the app better.
+
+The honest cost of keeping everything local showed up during screenshots. The recurring situations engine needs on-device language assets that the iOS Simulator does not have, so <Highlight>the Insights screens had to be captured on a real iPhone.</Highlight>
+
+<ProjectImage src="/projects/lucid-lock/insights.webp" alt="The dream signs App Store frame and two Insights screens showing recurring situations and a dream recall trend" caption="Insights. Every recurring situation here was computed on the device." />
+
+---
+
+## Privacy as Architecture
+
+Privacy came directly from the event that started the project, so I built it into the structure of the app instead of adding it at the end. Journal entries are stored locally with SwiftData, speech is transcribed on the device, and patterns are computed on the device. People can lock the journal with Face ID, export their own copy, import it again, and delete everything for real.
+
+Because there is no server, there is nothing to host, nothing to breach, and nothing to shut down. The app has no ad SDKs, no analytics SDKs, and no third-party packages, and its App Store privacy label reads Data Not Collected. <Highlight>The total recurring cost to run the product is the $99 Apple Developer fee.</Highlight> The most private architecture also turned out to be the cheapest one.
+
+<ProjectImage src="/projects/lucid-lock/onboarding.webp" alt="Three onboarding screens: Remember your dreams, Your journal doesn't leave this phone, and Your plan" caption="Onboarding. The privacy screen is a list of four true sentences and a Face ID button." />
+
+---
+
+## Testers Changed the Small Decisions
+
+Testing showed me things my own use never could. On the onboarding subscription screen, one tester read the back chevron as ordinary back navigation instead of an exit. She concluded that the app required payment just to keep a journal. I had understood that screen perfectly because I built it.
+
+<CalloutQuote>"Why do I have to pay for a dream journal when I can just spit it into ChatGPT and get an analysis?"</CalloutQuote>
+
+That misreading led to several changes. I named the paid layer Lucid Lock Pro, added a visible and labeled decline button, added a screen stating that the journal is unlimited and free forever, and <Highlight>removed every promise about how quickly anyone becomes lucid, because the app cannot honestly guarantee it.</Highlight> On August 27, I also grounded the pricing. The annual plan stayed at $49.99, the monthly plan dropped from $12.99 to $9.99, and I chose not to offer a free trial, since the free recall stage already lets people experience the product before they pay.
+
+<ProjectImage src="/projects/lucid-lock/pro-flow.webp" alt="The Pro pitch, the paywall with annual and monthly plans, and the free recall screen shown after declining" caption="The pay flow after tester feedback. Every step has a way out, and the free stage is spelled out rather than implied." />
+
+---
+
+## Six Screenshot Sets
+
+I gave the App Store listing the same treatment as the product. I designed six screenshot sets, labeled A through F, and each one had a written plan and a build script. Set A opened on a milestone ring that said nothing at thumbnail size. Set F opens on a real tester quote, used with her written permission, and it states the privacy claim in a form a competitor cannot easily copy. <Highlight>The six frames read in order like a short course on how the app works.</Highlight> The fourth frame is composited from two captures on a physical device because the pattern engine will not run in the Simulator.
+
+<ProjectImage src="/projects/lucid-lock/set-a-vs-set-f.webp" alt="App Store screenshot set F above set E, showing the evolution of the listing" caption="Two of the six screenshot sets. The captions were rewritten once more before upload, and the shipped set is at the top of this page." />
+
+---
+
+## Shipping and Distribution
+
+The administrative side nearly became its own project. I formed PixelNova LLC, converted my developer account into an organization, got a D-U-N-S number, and set up banking, tax, a business address, a support inbox, subscriptions, and App Store Connect agreements. I was also using Lucid Lock as my own dream journal the whole time, which meant any destructive test could erase entries I actually cared about.
+
+App Review rejected the first submission on September 11 because an app with auto-renewing subscriptions has to include a working Terms of Use link in its metadata. After I fixed that, Apple reviewed the build quickly and approved it. <Highlight>Lucid Lock went live on the App Store in mid-September 2026.</Highlight>
+
+By late August the app was in good shape and almost nobody could find it. I ran experiments on Instagram, TikTok, X, and YouTube covering dream phenomena, relatable dream problems, and lucid dreaming education. A new Instagram account was permanently banned, and TikTok results swung wildly from one post to the next. At Atlanta Tech Week, people pulled me aside to talk about lucid dreaming, and some of those conversations turned into early testers. My existing YouTube audience, which I built on Mario and game development, did not transfer to a dream app. <Highlight>Building a product and distributing one turned out to be almost separate skills.</Highlight>
+
+<ImageGrid columns={3} uniform>
+  <ProjectImage src="/projects/lucid-lock/dreamscape-doorway.webp" alt="Dreamscape b-roll frame of an infinite doorway" />
+  <ProjectImage src="/projects/lucid-lock/dreamscape-subway.webp" alt="Dreamscape b-roll frame of a subway in the clouds" />
+  <ProjectImage src="/projects/lucid-lock/dreamscape-notebook.webp" alt="Dreamscape b-roll frame of a notebook on bed sheets" />
+</ImageGrid>
+
+---
+
+## What I Learned
+
+The biggest lesson is that AI tools make building cheap and deciding expensive. My first build proved that an agent will happily produce a lot of software in the wrong direction. What fixed it was a methodology I now reuse: visual exploration first, then a specification, then an interactive prototype, then deliberate implementation, followed by automated tests, manual tests, and tests with real users. I only use models where they are dependable.
+
+I also learned that leaving things out is part of the product. The generated dream analysis that did not ship, the free trial I rejected, the progress promises I removed, and the server I never built all shaped Lucid Lock as much as anything on the screen.
+
+Finally, I learned that an audience does not transfer between subjects. I had already built an audience once on YouTube, and it did nothing for a dream journal. Distribution has to be built on purpose, the same way the product was, and that is the work I am doing now.
+
+[Download Lucid Lock on the App Store](https://apps.apple.com/app/id6802341928) · [Visit lucidlock.co](https://lucidlock.co) · [Read the Exponent Labs case study](https://exponentlabs.ai/case-studies/lucid-lock/)
