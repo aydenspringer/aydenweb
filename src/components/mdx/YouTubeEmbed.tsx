@@ -9,6 +9,7 @@ interface YouTubeEmbedProps {
   /** Start muted and loop once the embed scrolls into view, like a motion reel. */
   autoplay?: boolean
   aspectRatio?: string
+  className?: string
 }
 
 export function YouTubeEmbed({
@@ -17,6 +18,7 @@ export function YouTubeEmbed({
   caption,
   autoplay = true,
   aspectRatio = "16/9",
+  className = "my-8",
 }: YouTubeEmbedProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isNear, setIsNear] = useState(false)
@@ -47,7 +49,7 @@ export function YouTubeEmbed({
   })
 
   return (
-    <figure className="my-8">
+    <figure className={className}>
       <div
         ref={containerRef}
         className="relative w-full overflow-hidden rounded-xl border border-[#E8E4DF] bg-black"

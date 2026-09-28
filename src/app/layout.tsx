@@ -11,26 +11,26 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 export const metadata: Metadata = {
   metadataBase: new URL("https://aydenweb.com"),
   title: {
-    default: "Ayden Springer — Developer",
+    default: "Ayden Springer — Product Design & Development",
     template: "%s — Ayden Springer",
   },
   description:
-    "Computer science student and developer. Built AI products at Elysium Health, pixel art platforms with Stripe, and won the Stacks embedded wallet hackathon. Available for full-time roles starting Summer 2027.",
+    "I design and build web and mobile products for founders and small teams, from the first product flow to a working release.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://aydenweb.com",
     siteName: "Ayden Springer",
-    title: "Ayden Springer — Developer",
+    title: "Ayden Springer — Product Design & Development",
     description:
-      "Computer science student and developer. Built AI products at Elysium Health, pixel art platforms with Stripe, and won the Stacks embedded wallet hackathon.",
+      "I design and build web and mobile products for founders and small teams, from the first product flow to a working release.",
   },
   twitter: {
     card: "summary",
-    title: "Ayden Springer — Developer",
+    title: "Ayden Springer — Product Design & Development",
     description:
-      "Computer science student and developer. Built AI products at Elysium Health, pixel art platforms with Stripe, and won the Stacks embedded wallet hackathon.",
+      "I design and build web and mobile products for founders and small teams, from the first product flow to a working release.",
   },
   robots: {
     index: true,

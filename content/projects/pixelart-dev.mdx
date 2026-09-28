@@ -20,6 +20,7 @@ tools:
   - "WebAssembly"
   - "Tailwind CSS"
 description: "An AI pixel art generator for game developers, rebuilt around coherent asset sets. First prototype to live billing in nine days."
+summary: "An AI pixel art generator that makes sprites that belong in the same game. I designed and built it end to end, going from first prototype to live Stripe billing in nine days."
 order: 2
 featured: true
 category: "featured"
@@ -90,7 +91,7 @@ A set cut from one scene matches by construction, which a prompt could never gua
 
 Single sprites were only the start. Within the first week, I added sprite sheets that come from one coordinated generation and get split into matching frames, parallax backgrounds that come back as two to four separate looping layers, and terrain tilesets. I also built an inline pixel editor with auto-align for finished sheets, because a good result with a few stray pixels should be fixed, not regenerated.
 
-<ProjectVideo src="/projects/pixelart-dev/parallax-build.mp4" alt="A parallax farmland sunset background being generated and separated into layers" caption="A parallax background being generated and split into looping layers." aspectRatio="1192/670" />
+<ProjectVideo src="/projects/pixelart-dev/parallax-loop.mp4" alt="A pixel art forest background scrolling as four parallax layers: a sky, distant hills, a mid forest, and near trees" caption="A generated parallax background. The four layers are real outputs, each scrolling at its own speed the way they would in a game." aspectRatio="1808/1128" />
 
 <ImageGrid columns={2}>
   <ProjectImage src="/projects/pixelart-dev/editor.png" alt="The built-in pixel editor with drawing tools and a sheet palette" caption="The built-in editor. Editing is free and never calls the model." />

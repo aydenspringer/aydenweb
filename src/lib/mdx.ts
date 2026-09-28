@@ -22,6 +22,7 @@ export interface ProjectFrontmatter {
   collaborators?: string
   tools: string[]
   description?: string
+  summary?: string
   order: number
   featured: boolean
   category: ProjectCategory
